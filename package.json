@@ -5,6 +5,7 @@
   "main": "dist/index.mjs",
   "scripts": {
     "dev": "npm run build && clear && node ./dist/index.mjs playground/playground.ts",
+    "dev:watch": "npm run build && clear && node ./dist/index.mjs playground/playground.ts --watch",
     "build": "tsdown",
     "format": "biome format --write src",
     "lint": "biome lint --write src"

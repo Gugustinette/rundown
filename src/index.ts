@@ -1,6 +1,7 @@
 import path from "node:path";
 import fs from "node:fs";
 import { run } from "./features/run";
+import { watch } from "./features/watch";
 
 /**
  * `rundown` main entry point.
@@ -8,12 +9,15 @@ import { run } from "./features/run";
  * @returns {Promise<void>} - A promise that resolves when the process is complete.
  */
 const main = async (args: string[]): Promise<void> => {
-	// Get given arguments
+	// Get given file path from command line arguments
 	const fileToRun = args[0];
 	// Check if the file path is provided
 	if (!fileToRun) {
 		throw new Error("Please provide a file path to run.");
 	}
+
+	// Get the watch flag
+	const watchFlag = args.includes("--watch") || args.includes("-w");
 
 	// Get the file path
 	const filePath = path.resolve(process.cwd(), fileToRun);
@@ -22,9 +26,13 @@ const main = async (args: string[]): Promise<void> => {
 		throw new Error(`File not found: ${filePath}`);
 	}
 
-	// Run the file using Rolldown
-	const result = await run(filePath);
-	return result;
+	if (watchFlag) {
+		await watch(filePath);
+	} else {
+		// Run the file using Rolldown
+		const result = await run(filePath);
+		return result;
+	}
 };
 
 // Execute the main function with the command line arguments
