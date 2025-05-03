@@ -2,7 +2,29 @@
   "name": "rundown",
   "version": "0.0.0",
   "description": "Run TypeScript in Node.js, powered by Rolldown",
+  "keywords": [],
+  "author": "Augustin Mercier 'Gugustinette'",
+  "license": "MIT",
+  "homepage": "https://github.com/gugustinette/rundown#readme",
+  "bugs": {
+    "url": "https://github.com/gugustinette/rundown/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gugustinette/rundown.git"
+  },
   "main": "dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "rundown": "./dist/cli.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "npm run build && clear && node ./dist/index.mjs playground/playground.ts",
     "dev:watch": "npm run build && clear && node ./dist/index.mjs playground/playground.ts --watch",
@@ -10,9 +32,6 @@
     "format": "biome format --write src",
     "lint": "biome lint --write src"
   },
-  "keywords": [],
-  "author": "Augustin Mercier 'Gugustinette'",
-  "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/node": "^22.15.3",
@@ -20,5 +39,8 @@
   },
   "dependencies": {
     "rolldown": "^1.0.0-beta.8-commit.852c603"
+  },
+  "engines": {
+    "node": ">=20.18.0"
   }
 }
