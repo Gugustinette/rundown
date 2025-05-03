@@ -2,7 +2,7 @@ import { watch as rolldownWatch } from "rolldown";
 import { run } from "./run";
 
 /**
- * Run a given TypeScript file using Rolldown.
+ * Watch a TypeScript file for changes and run it using Rolldown.
  * @param {string} filePath - The path to the TypeScript file to run.
  * @returns {Promise<void>} - A promise that resolves when the watcher has finished running.
  */
