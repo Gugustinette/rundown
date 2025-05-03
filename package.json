@@ -19,7 +19,7 @@
     "dist"
   ],
   "bin": {
-    "rundown": "./dist/cli.mjs"
+    "rundown": "./dist/index.mjs"
   },
   "publishConfig": {
     "access": "public"

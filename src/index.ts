@@ -1,43 +1,8 @@
-import path from "node:path";
-import fs from "node:fs";
-import { run } from "./features/run";
-import { watch } from "./features/watch";
-
-/**
- * `rundown` main entry point.
- * @param {string[]} args - Command line arguments.
- * @returns {Promise<void>} - A promise that resolves when the process is complete.
- */
-const main = async (args: string[]): Promise<void> => {
-	// Get given file path from command line arguments
-	const fileToRun = args[0];
-	// Check if the file path is provided
-	if (!fileToRun) {
-		throw new Error("Please provide a file path to run.");
-	}
-
-	// Get the watch flag
-	const watchFlag = args.includes("--watch") || args.includes("-w");
-
-	// Resolve the file path to an absolute path
-	const filePath = path.resolve(process.cwd(), fileToRun);
-	// Check if the file exists
-	if (!fs.existsSync(filePath)) {
-		throw new Error(`File not found: ${filePath}`);
-	}
-
-	if (watchFlag) {
-		// Watch and run the file using Rolldown
-		await watch(filePath);
-	} else {
-		// Run the file using Rolldown
-		const result = await run(filePath);
-		return result;
-	}
-};
+#!/usr/bin/env node
+import { cli } from "./cli";
 
 // Execute the main function with the command line arguments
-main(process.argv.slice(2))
+cli(process.argv.slice(2))
 	.then(() => {
 		// Exit the process with a success code
 		process.exit(0);
