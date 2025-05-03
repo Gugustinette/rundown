@@ -19,7 +19,7 @@ const main = async (args: string[]): Promise<void> => {
 	// Get the watch flag
 	const watchFlag = args.includes("--watch") || args.includes("-w");
 
-	// Get the file path
+	// Resolve the file path to an absolute path
 	const filePath = path.resolve(process.cwd(), fileToRun);
 	// Check if the file exists
 	if (!fs.existsSync(filePath)) {
@@ -27,6 +27,7 @@ const main = async (args: string[]): Promise<void> => {
 	}
 
 	if (watchFlag) {
+		// Watch and run the file using Rolldown
 		await watch(filePath);
 	} else {
 		// Run the file using Rolldown
