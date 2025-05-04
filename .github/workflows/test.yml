@@ -1,0 +1,44 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - "src/**"
+      - "test/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - "src/**"
+      - "test/**"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+      # Remove package-lock.json because native bindings 💀
+      - name: Remove package-lock.json
+        run: |
+          if [ -f package-lock.json ]; then
+            rm package-lock.json
+          fi
+      # Install dependencies
+      - run: npm install
+      # Build the library
+      - name: Build
+        run: npm run build
+      # Run tests
+      - name: Run tests
+        run: npm run test

@@ -1,0 +1,40 @@
+name: Publish to NPM
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+      # Remove package-lock.json because native bindings 💀
+      - name: Remove package-lock.json
+        run: |
+          if [ -f package-lock.json ]; then
+            rm package-lock.json
+          fi
+      # Install dependencies
+      - run: npm install
+      # Build the library
+      - name: Build
+        run: npm run build
+      # Configure Git for automated commits
+      - name: Configuring Git
+        run: git config --global user.name "GitHub CD bot" && git config --global user.email "github-cd-bot@users.noreply.github.com"
+      # Bump package version
+      - name: Update package version
+        run: npm --no-git-tag-version version ${{ github.event.release.tag_name }}
+      # Publish package to NPM
+      - name: Publish package to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Push changes to GitHub (package.json and package-lock.json)
+      - name: Push changes to GitHub
+        run: git commit -am "Release ${{ github.event.release.tag_name }}" && git push origin HEAD:main
