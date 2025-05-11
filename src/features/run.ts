@@ -1,11 +1,12 @@
 import { rolldown } from "rolldown";
+import { execute } from "../utils/execute";
 
 /**
  * Run a given TypeScript file using Rolldown.
  * @param {string} filePath - The path to the TypeScript file to run.
- * @returns {Promise<void>} - A promise that resolves when the file has finished running.
+ * @returns {Promise<string>} - A promise that resolves with the code's output when the file has finished running.
  */
-export const run = async (filePath: string): Promise<void> => {
+export const run = async (filePath: string): Promise<string> => {
 	// Setup bundle
 	const bundle = await rolldown({
 		// Input options (https://rolldown.rs/reference/config-options#inputoptions)
@@ -26,14 +27,8 @@ export const run = async (filePath: string): Promise<void> => {
 	const outputChunk = rolldownOutput.output[0];
 	const code = outputChunk.code;
 
-	// Run the code using eval
-	// biome-ignore lint/security/noGlobalEval: eval is required to run the code
-	const result: unknown = eval(code);
-	// Check if the result is a promise
-	if (result && typeof result === "object" && "then" in result) {
-		// If it is a promise, wait for it to resolve
-		await result;
-	}
-	// If it is not a promise, just return
-	return;
+	// Run the code
+	const result = await execute(code);
+	// Return the output
+	return result.output;
 };

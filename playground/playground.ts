@@ -14,3 +14,6 @@ const person: Person = {
 	},
 };
 person.greet();
+
+// Exit with success
+process.exit(0);

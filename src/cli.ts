@@ -31,7 +31,6 @@ export const cli = async (args: string[]): Promise<void> => {
 		await watch(filePath);
 	} else {
 		// Run the file using Rolldown
-		const result = await run(filePath);
-		return result;
+		await run(filePath);
 	}
 };
