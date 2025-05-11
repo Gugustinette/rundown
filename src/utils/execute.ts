@@ -12,8 +12,10 @@ interface ExecutionResult {
  */
 export async function execute(code: string): Promise<ExecutionResult> {
 	return new Promise((resolve, reject) => {
+		// Get the path to the Node.js executable in the current environment
+		const nodePath = process.execPath;
 		// Spawn a Node.js process that reads from stdin
-		const childProcess = spawn("node", ["-"]);
+		const childProcess = spawn(nodePath, ["-"]);
 
 		let output = "";
 
