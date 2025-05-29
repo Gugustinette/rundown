@@ -1,5 +1,8 @@
 # Rundown
 
+> [!WARNING]
+> This has not been released yet, thus the package is not available on npm.
+
 Run TypeScript in Node.js, powered by [Rolldown](https://rolldown.rs/).
 
 Inspired by [tsx](https://tsx.is/).
