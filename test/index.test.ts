@@ -1,10 +1,14 @@
 import { expect, test, describe } from "vitest";
-import { cli } from "../src/cli";
+import { run } from "../src/features/run";
 
 describe("rundown", () => {
-	test("should run the file without watch", async () => {
-		const args = ["./test/fixtures/index.data.ts"];
-		const result = await cli(args);
-		expect(result).toBeUndefined();
+	test("should run hello world", async () => {
+		const result = await run("./test/fixtures/hello-world.data.ts");
+		expect(result).toMatchSnapshot();
+	});
+
+	test("should run export function hello world", async () => {
+		const result = await run("./test/fixtures/export-function.data.ts");
+		expect(result).toMatchSnapshot();
 	});
 });

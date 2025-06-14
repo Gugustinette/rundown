@@ -15,7 +15,7 @@ export async function execute(code: string): Promise<ExecutionResult> {
 		// Get the path to the Node.js executable in the current environment
 		const nodePath = process.execPath;
 		// Spawn a Node.js process that reads from stdin
-		const childProcess = spawn(nodePath, ["-"]);
+		const childProcess = spawn(nodePath, ["--input-type=module", "-"]);
 
 		let output = "";
 

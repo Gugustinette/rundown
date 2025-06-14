@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`rundown > should run export function hello world 1`] = `
+"Hello, world!
+"
+`;
+
+exports[`rundown > should run hello world 1`] = `
+"Hello, world!
+"
+`;
