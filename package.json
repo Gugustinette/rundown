@@ -27,6 +27,7 @@
   "scripts": {
     "dev": "npm run build && clear && node ./dist/index.mjs playground/playground.ts",
     "dev:watch": "npm run build && clear && node ./dist/index.mjs playground/playground.ts --watch",
+    "dev:repl": "npm run build && clear && node ./dist/index.mjs",
     "build": "tsdown",
     "test": "vitest --run",
     "test:watch": "vitest",
@@ -40,6 +41,7 @@
     "vitest": "^3.2.3"
   },
   "dependencies": {
+    "oxc-transform": "^0.73.0",
     "rolldown": "1.0.0-beta.15"
   },
   "engines": {
