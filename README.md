@@ -18,8 +18,16 @@ npm install -D rundown
 - Run TypeScript files
 
 ```bash
+# Global usage
 rundown index.ts
+# Local usage
+./node_modules/.bin/rundown index.ts
 ```
+
+- Available features
+  - Run (by giving a file path)
+  - Watch (`--watch` or `-w`)
+  - Extends Node.js [REPL](https://nodejs.org/en/learn/command-line/how-to-use-the-nodejs-repl) (by giving no arguments at all)
 
 ## Development
 

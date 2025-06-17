@@ -2,6 +2,7 @@ import path from "node:path";
 import fs from "node:fs";
 import { run } from "./features/run";
 import { watch } from "./features/watch";
+import { startRepl } from "./features/repl";
 
 /**
  * `rundown` command entry point.
@@ -9,6 +10,12 @@ import { watch } from "./features/watch";
  * @returns {Promise<void>} - A promise that resolves when the process is complete.
  */
 export const cli = async (args: string[]): Promise<void> => {
+	// If no arguments are provided, start the REPL
+	if (args.length === 0) {
+		await startRepl();
+		return;
+	}
+
 	// Get given file path from command line arguments
 	const fileToRun = args[0];
 	// Check if the file path is provided
