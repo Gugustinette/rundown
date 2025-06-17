@@ -28,6 +28,7 @@
     "dev": "npm run build && clear && node ./dist/index.mjs playground/playground.ts",
     "dev:watch": "npm run build && clear && node ./dist/index.mjs playground/playground.ts --watch",
     "dev:repl": "npm run build && clear && node ./dist/index.mjs",
+    "dev:test": "npm run build && clear && node ./dist/index.mjs --test",
     "build": "tsdown",
     "test": "vitest --run",
     "test:watch": "vitest",
@@ -36,7 +37,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@types/node": "^24.0.1",
+    "@types/node": "^24.0.3",
     "tsdown": "^0.12.7",
     "vitest": "^3.2.3"
   },

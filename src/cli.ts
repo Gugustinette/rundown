@@ -3,6 +3,7 @@ import fs from "node:fs";
 import { run } from "./features/run";
 import { watch } from "./features/watch";
 import { startRepl } from "./features/repl";
+import { test } from "./features/test";
 
 /**
  * `rundown` command entry point.
@@ -13,6 +14,12 @@ export const cli = async (args: string[]): Promise<void> => {
 	// If no arguments are provided, start the REPL
 	if (args.length === 0) {
 		await startRepl();
+		return;
+	}
+
+	// If args contains the --test flag, run the test suite
+	if (args.includes("--test") || args.includes("-t")) {
+		await test();
 		return;
 	}
 
