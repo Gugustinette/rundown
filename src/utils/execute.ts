@@ -6,16 +6,21 @@ interface ExecutionResult {
 }
 
 /**
- * Executes JavaScript code in a Node.js child process and returns the result
- * @param code The JavaScript code to execute as a string
- * @returns Promise that resolves with the exit code and console output (default exit code is 0)
+ * Executes JavaScript code in a Node.js child process and returns the result.
+ * @param code The JavaScript code to execute as a string.
+ * @param {...any} args - Additional arguments to pass to the Node process.
+ * @returns Promise that resolves with the exit code and console output (default exit code is 0).
  */
-export async function execute(code: string): Promise<ExecutionResult> {
+export async function execute(
+	code: string,
+	// biome-ignore lint/suspicious/noExplicitAny: Any is used here to allow flexibility in the arguments passed to the Node process
+	...args: any
+): Promise<ExecutionResult> {
 	return new Promise((resolve, reject) => {
 		// Get the path to the Node.js executable in the current environment
 		const nodePath = process.execPath;
 		// Spawn a Node.js process that reads from stdin
-		const childProcess = spawn(nodePath, ["--input-type=module", "-"]);
+		const childProcess = spawn(nodePath, ["--input-type=module", ...args, "-"]);
 
 		let output = "";
 

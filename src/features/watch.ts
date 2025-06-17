@@ -4,9 +4,11 @@ import { run } from "./run";
 /**
  * Watch a TypeScript file for changes and run it using Rolldown.
  * @param {string} filePath - The path to the TypeScript file to run.
+ * @param {...any} args - Additional arguments to pass to the Node process.
  * @returns {Promise<void>} - A promise that resolves when the watcher has finished running.
  */
-export const watch = async (filePath: string): Promise<void> => {
+// biome-ignore lint/suspicious/noExplicitAny: Any is used here to allow flexibility in the arguments passed to the Node process
+export const watch = async (filePath: string, ...args: any): Promise<void> => {
 	const watcher = rolldownWatch({
 		input: filePath,
 		output: {
@@ -23,7 +25,7 @@ export const watch = async (filePath: string): Promise<void> => {
 			// Clear the console
 			console.clear();
 			// Run the file using Rolldown
-			await run(filePath);
+			await run(filePath, ...args);
 		}
 	});
 

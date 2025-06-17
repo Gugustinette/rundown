@@ -17,14 +17,19 @@ export const cli = async (args: string[]): Promise<void> => {
 	}
 
 	// Get given file path from command line arguments
-	const fileToRun = args[0];
+	const fileToRun = args.find((arg) => !arg.startsWith("-"));
 	// Check if the file path is provided
 	if (!fileToRun) {
 		throw new Error("Please provide a file path to run.");
 	}
 
-	// Get the watch flag
+	// Parse flags
 	const watchFlag = args.includes("--watch") || args.includes("-w");
+
+	// Remove rundown arguments from the list
+	const passedArgs = args.filter((arg) => !["--watch", "-w"].includes(arg));
+	// Remove the file path from the list of arguments
+	passedArgs.splice(passedArgs.indexOf(fileToRun), 1);
 
 	// Resolve the file path to an absolute path
 	const filePath = path.resolve(process.cwd(), fileToRun);
@@ -35,9 +40,9 @@ export const cli = async (args: string[]): Promise<void> => {
 
 	if (watchFlag) {
 		// Watch and run the file using Rolldown
-		await watch(filePath);
+		await watch(filePath, passedArgs);
 	} else {
 		// Run the file using Rolldown
-		await run(filePath);
+		await run(filePath, passedArgs);
 	}
 };
