@@ -1,6 +1,6 @@
 {
   "name": "rundown",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Run TypeScript in Node.js, powered by Rolldown",
   "keywords": [],
   "author": "Augustin Mercier 'Gugustinette'",
