@@ -35,3 +35,14 @@ repl.start = function (...args) {
 	patchEval(nodeRepl);
 	return nodeRepl;
 };
+
+export const startRepl = async () => {
+	const nodeRepl = repl.start({
+		useGlobal: true,
+	});
+
+	patchEval(nodeRepl);
+
+	// Keep the REPL running
+	await new Promise(() => {});
+};

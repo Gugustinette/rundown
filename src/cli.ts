@@ -2,7 +2,7 @@ import path from "node:path";
 import fs from "node:fs";
 import { run } from "./features/run";
 import { watch } from "./features/watch";
-import "./features/repl"; // This line applies the REPL patch
+import { startRepl } from "./features/repl";
 
 /**
  * `rundown` command entry point.
@@ -12,8 +12,7 @@ import "./features/repl"; // This line applies the REPL patch
 export const cli = async (args: string[]): Promise<void> => {
 	// If no arguments are provided, start the REPL
 	if (args.length === 0) {
-		require("node:repl").start();
-		await new Promise(() => {}); // Keep the REPL running
+		await startRepl();
 		return;
 	}
 
