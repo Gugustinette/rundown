@@ -19,7 +19,7 @@ export const cli = async (args: string[]): Promise<void> => {
 
 	// If args contains the --test flag, run the test suite
 	if (args.includes("--test") || args.includes("-t")) {
-		await test();
+		await test(args);
 		return;
 	}
 

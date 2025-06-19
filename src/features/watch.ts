@@ -7,8 +7,10 @@ import { run } from "./run";
  * @param {...any} args - Additional arguments to pass to the Node process.
  * @returns {Promise<void>} - A promise that resolves when the watcher has finished running.
  */
-// biome-ignore lint/suspicious/noExplicitAny: Any is used here to allow flexibility in the arguments passed to the Node process
-export const watch = async (filePath: string, ...args: any): Promise<void> => {
+export const watch = async (
+	filePath: string,
+	args: string[],
+): Promise<void> => {
 	const watcher = rolldownWatch({
 		input: filePath,
 		output: {
@@ -25,7 +27,7 @@ export const watch = async (filePath: string, ...args: any): Promise<void> => {
 			// Clear the console
 			console.clear();
 			// Run the file using Rolldown
-			await run(filePath, ...args);
+			await run(filePath, args);
 		}
 	});
 

@@ -25,10 +25,12 @@
     "access": "public"
   },
   "scripts": {
-    "dev": "npm run build && clear && node ./dist/index.mjs playground/playground.ts",
-    "dev:watch": "npm run build && clear && node ./dist/index.mjs playground/playground.ts --watch",
-    "dev:repl": "npm run build && clear && node ./dist/index.mjs",
-    "dev:test": "npm run build && clear && node ./dist/index.mjs --test",
+    "dev": "npm run build && clear && node ./dist/index.mjs --no-experimental-strip-types playground/playground.ts",
+    "dev:watch": "npm run build && clear && node ./dist/index.mjs --no-experimental-strip-types playground/playground.ts --watch",
+    "dev:repl": "npm run build && clear && node ./dist/index.mjs --no-experimental-strip-types",
+    "dev:test": "npm run build && clear && node ./dist/index.mjs --no-experimental-strip-types --test \"playground/*.test.ts\"",
+    "dev:test:watch": "npm run build && clear && node ./dist/index.mjs --no-experimental-strip-types --test --watch \"playground/*.test.ts\"",
+    "dev:loader": "npm run build && clear && node --import ./dist/loader.mjs --no-experimental-strip-types playground/playground.ts",
     "build": "tsdown",
     "test": "vitest --run",
     "test:watch": "vitest",

@@ -7,8 +7,10 @@ import { execute } from "../utils/execute";
  * @param {...any} args - Additional arguments to pass to the Node process.
  * @returns {Promise<string>} - A promise that resolves with the code's output when the file has finished running.
  */
-// biome-ignore lint/suspicious/noExplicitAny: Any is used here to allow flexibility in the arguments passed to the Node process
-export const run = async (filePath: string, ...args: any): Promise<string> => {
+export const run = async (
+	filePath: string,
+	args: string[],
+): Promise<string> => {
 	// Setup bundle
 	const bundle = await rolldown({
 		// Input options (https://rolldown.rs/reference/config-options#inputoptions)
@@ -30,7 +32,7 @@ export const run = async (filePath: string, ...args: any): Promise<string> => {
 	const code = outputChunk.code;
 
 	// Run the code
-	const result = await execute(code, ...args);
+	const result = await execute(code, args);
 	// Return the output
 	return result.output;
 };
