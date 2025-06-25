@@ -9,7 +9,7 @@ import { execute } from "../utils/execute";
  */
 export const run = async (
 	filePath: string,
-	args: string[],
+	args?: string[],
 ): Promise<string> => {
 	// Setup bundle
 	const bundle = await rolldown({
