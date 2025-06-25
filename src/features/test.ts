@@ -7,6 +7,9 @@ import type { ExecutionResult } from "../utils/execute";
  * @returns {Promise<void>} - A promise that resolves when the test runner has finished executing.
  */
 export const test = async (args: string[]): Promise<ExecutionResult> => {
+	// Resolve the loader path from the package
+	const loaderPath = require.resolve("./loader.mjs");
+
 	// Use rawExecute to spawn Node with the loader and args
-	return rawExecute(["--import", "./dist/loader.mjs", ...args]);
+	return rawExecute(["--import", loaderPath, ...args]);
 };
