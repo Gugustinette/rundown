@@ -11,23 +11,19 @@ import { test } from "./features/test";
  * @returns {Promise<void>} - A promise that resolves when the process is complete.
  */
 export const cli = async (args: string[]): Promise<void> => {
-	// If no arguments are provided, start the REPL
-	if (args.length === 0) {
-		await startRepl();
-		return;
-	}
-
 	// If args contains the --test flag, run the test suite
 	if (args.includes("--test") || args.includes("-t")) {
 		await test(args);
 		return;
 	}
 
+	// If no file path is provided, start the REPL
 	// Get given file path from command line arguments
 	const fileToRun = args.find((arg) => !arg.startsWith("-"));
 	// Check if the file path is provided
 	if (!fileToRun) {
-		throw new Error("Please provide a file path to run.");
+		await startRepl();
+		return;
 	}
 
 	// Parse flags

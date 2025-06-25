@@ -2,11 +2,18 @@ import { fileURLToPath } from "node:url";
 import { rolldown } from "rolldown";
 import { builtinModules, register } from "node:module";
 import type { LoadHook } from "node:module";
-import { pathToFileURL } from "node:url";
 
 const tsExtensions = new Set([".ts", ".tsx", ".mts", ".cts"]);
 const builtinModulesSet = new Set(builtinModules);
 
+/**
+ * Custom loader for Node.js that transforms TypeScript files using Rolldown.
+ * @param url The URL of the module to load.
+ * @param context The context in which the module is being loaded.
+ * @param nextLoad The next load hook in the chain.
+ * @throws If the transformation fails or if the output is empty.
+ * @returns An object containing the transformed module code and format.
+ */
 export const load: LoadHook = async (url, context, nextLoad) => {
 	// Check if the URL has a file: scheme before converting
 	if (!url.startsWith("file:")) {
