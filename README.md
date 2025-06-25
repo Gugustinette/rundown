@@ -4,6 +4,12 @@ Run TypeScript in Node.js, powered by [Rolldown](https://rolldown.rs/).
 
 Inspired by [tsx](https://tsx.is/).
 
+- Available features
+  - Run (by giving a file path)
+  - Watch (`--watch` or `-w`)
+  - Extends Node.js [REPL](https://nodejs.org/en/learn/command-line/how-to-use-the-nodejs-repl) (by giving no arguments at all)
+  - Extends Node.js [Test runner](https://nodejs.org/api/test.html) (by giving `--test` or `-t`)
+
 ## Usage
 
 - Install `rundown`
@@ -23,11 +29,6 @@ rundown index.ts
 # Local usage
 ./node_modules/.bin/rundown index.ts
 ```
-
-- Available features
-  - Run (by giving a file path)
-  - Watch (`--watch` or `-w`)
-  - Extends Node.js [REPL](https://nodejs.org/en/learn/command-line/how-to-use-the-nodejs-repl) (by giving no arguments at all)
 
 ## Development
 
